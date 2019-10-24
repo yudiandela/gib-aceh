@@ -29,11 +29,10 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-
                 @if (Route::has('login'))
                 <li class="nav-item">
                     @auth
-                    <a class="btn btn-primary" href="{{ route('dashboard.index') }}">
+                    <a class="btn btn-primary" href="{{ route('dashboard') }}">
                         <i class="fas fa-tachometer-alt"></i> {{ __('Dashboard') }}
                     </a>
                     @else
@@ -55,7 +54,7 @@
 
     <div class="mt-5">
         <div class="login-logo">
-            <img width="500" src="/images/gib-aceh-banner.png" alt="{{ config('app.name') }} Banner">
+            <img width="900" src="/images/gib-aceh-banner.png" alt="{{ config('app.name') }} Banner">
         </div>
     </div>
 </body>
