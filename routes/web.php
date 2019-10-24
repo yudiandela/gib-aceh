@@ -13,9 +13,7 @@
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'RootController');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
