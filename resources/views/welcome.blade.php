@@ -7,85 +7,55 @@
 
     <title>{{ config('app.name') }}</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-    <!-- Styles -->
-    <style>
-        html,
-        body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links>a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/vendor/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="/vendor/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/vendor/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
 <body>
-    <div class="flex-center position-ref full-height">
-        @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-            <a href="{{ url('/home') }}">Home</a>
-            @else
-            <a href="{{ route('login') }}">Login</a>
+    <div class="container mt-3">
+        <nav class="navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
 
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}">Register</a>
-            @endif
-            @endauth
-        </div>
-        @endif
+            </ul>
 
-        <div class="content">
-            <div class="title m-b-md">
-                <img src="/images/gib-aceh-banner.png" alt="GIB Aceh" width="500">
-            </div>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+
+                @if (Route::has('login'))
+                <li class="nav-item">
+                    @auth
+                    <a class="btn btn-primary" href="{{ route('dashboard.index') }}">
+                        <i class="fas fa-tachometer-alt"></i> {{ __('Dashboard') }}
+                    </a>
+                    @else
+                    <a class="btn btn-primary" href="{{ route('login') }}">
+                        <i class="fas fa-sign-in-alt"></i> {{ __('Login') }}
+                    </a>
+
+                    @if (Route::has('register'))
+                    <a class="btn btn-primary" href="{{ route('register') }}">
+                        <i class="fas fa-users"></i> {{ __('Register') }}
+                    </a>
+                    @endif
+                    @endauth
+                </li>
+                @endif
+            </ul>
+        </nav>
+    </div>
+
+    <div class="mt-5">
+        <div class="login-logo">
+            <img width="500" src="/images/gib-aceh-banner.png" alt="{{ config('app.name') }} Banner">
         </div>
     </div>
 </body>
