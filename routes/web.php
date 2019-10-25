@@ -17,4 +17,8 @@ Route::get('/', 'RootController');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', 'DashboardController')->name('dashboard');
+
+    // Profile CRUD
+    Route::get('profile', 'ProfileController@index')->name('profile');
+    Route::post('profile', 'ProfileController@store');
 });

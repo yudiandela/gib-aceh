@@ -75,28 +75,32 @@
                                 <p>{{ __('Dashboard') }}</p>
                             </a>
                         </li>
-                        {{-- <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Starter Page
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
+                        <li class="nav-item">
+                            <a href="{{ route('profile') }}"
+                                class="nav-link {{ strpos(Route::currentRouteName(), 'profile') !== false ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>{{ __('Profile') }}</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Active Page</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Inactive Page</p>
-                                    </a>
-                                </li>
-                            </ul>
+                        </li>
+                        {{-- <li
+                            class="nav-item has-treeview {{ strpos(Route::currentRouteName(), 'profile') !== false ? 'menu-open' : '' }}">
+                        <a href="#"
+                            class="nav-link {{ strpos(Route::currentRouteName(), 'profile') !== false ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-list"></i>
+                            <p>
+                                {{ __('User Management') }}
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('profile.index') }}"
+                                    class="nav-link {{ strpos(Route::currentRouteName(), 'profile.index') !== false ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>My Profile</p>
+                                </a>
+                            </li>
+                        </ul>
                         </li> --}}
                     </ul>
                 </nav>
@@ -135,12 +139,17 @@
     <script src="/vendor/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/vendor/dist/js/adminlte.min.js"></script>
+    <!-- InputMask -->
+    <script src="/vendor/plugins/moment/moment.min.js"></script>
+    <script src="/vendor/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
 
     <script>
         $('#logoutBtn').click(function(event) {
             event.preventDefault();
             $('#logoutForm').submit();
         })
+        // Format Handphone
+        $('[data-mask]').inputmask()
     </script>
 </body>
 
