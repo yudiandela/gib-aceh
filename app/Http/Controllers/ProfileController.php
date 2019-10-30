@@ -74,10 +74,9 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->hasFile('photo')) {
-            $image            = $request->file('photo');
-            $originalFileName = $image->getClientOriginalName();
-            $extension        = $image->getClientOriginalExtension();
-            $fileName         = Str::slug(env('UNIQUE_PHOTO_NAME', 'gib-aceh') . ' ' . Auth::user()->name . ' ' . date('d-m-Y') . ' ' . time()) . '.' . $extension;
+            $image     = $request->file('photo');
+            $extension = $image->getClientOriginalExtension();
+            $fileName  = Str::slug('gib-aceh' . ' ' . Auth::user()->name . ' ' . date('d-m-Y') . ' ' . time()) . '.' . $extension;
 
             $image_url = $image->storeAs('public/profile', $fileName);
 
@@ -87,6 +86,7 @@ class ProfileController extends Controller
         }
 
         return redirect()->back()->with('success', 'Berhasil mengubah photo profile');
+        dd($image_url);
     }
 
     /**

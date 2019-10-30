@@ -28,7 +28,7 @@
                         <div class="text-center">
                             <img class="profile-user-img" src="{{ $user->profile->avatar }}" alt="User profile picture">
 
-                            <form action="{{ route('profile.update', Auth::user()->id) }}" method="post"
+                            <form action="{{ route('profile.update', $user->profile->id) }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
@@ -149,7 +149,7 @@
                                             <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                         </div>
                                         <input name="phone" id="inputPhone" type="text" class="form-control"
-                                            data-inputmask="&quot;mask&quot;: &quot;+99 999 9999 9999&quot;"
+                                            data-inputmask="&quot;mask&quot;: &quot;+62 999 9999 9999&quot;"
                                             data-mask="" im-insert="true"
                                             value="{{ $user->profile->phone ?: old('phone') }}">
                                     </div>
