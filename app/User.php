@@ -41,4 +41,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function isAdmin()
+    {
+        if ($this->role === 1) {
+            return true;
+        }
+
+        return false;
+    }
 }

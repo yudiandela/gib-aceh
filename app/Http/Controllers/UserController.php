@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('role', '<>', 1)->get();
         return view('user.index', compact('users'));
     }
 
@@ -81,6 +81,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->back()->with('success', 'Berhasil menghapus data user');
     }
 }

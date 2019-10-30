@@ -53,6 +53,20 @@
                                     data-youtube="{{ $user->profile !== null ? $user->profile->youtube_user : 'Belum ada data' }}">
                                     <i class="fas fa-eye"></i>
                                 </a>
+
+                                @if (Auth::user()->isAdmin())
+                                <a href="{{ route('user.destroy', $user->id) }}"
+                                    class="btn-remove btn btn-danger btn-sm"
+                                    onclick="event.preventDefault(); document.getElementById('delete-user-{{ $user->id }}').submit();">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+
+                                <form id="delete-user-{{ $user->id }}" action="{{ route('user.destroy', $user->id) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('delete')
+                                </form>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

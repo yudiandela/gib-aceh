@@ -279,13 +279,5 @@
     $('.btn-upload').hide()
 
     $("#photo-user").change(readURL)
-
-    @if (session('success'))
-    toastr.success('{{ session('success') }}')
-    @endif
-
-    @if (session('error'))
-    toastr.error('{{ session('error') }}')
-    @endif
 </script>
 @endpush
