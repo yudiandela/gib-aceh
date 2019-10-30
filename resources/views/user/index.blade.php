@@ -134,7 +134,10 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                    Close
+                </button>
             </div>
         </div>
         <!-- /.modal-content -->

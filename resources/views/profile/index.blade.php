@@ -115,7 +115,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         </div>
-                                        <input disabled type="text" class="form-control disabled" id="inputName"
+                                        <input name="name" type="text" class="form-control" id="inputName"
                                             value="{{ $user->name ?: old('name') }}"
                                             placeholder="{{ __('Full Name') }}">
                                     </div>

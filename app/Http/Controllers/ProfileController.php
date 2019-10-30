@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Profile;
+use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,13 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->name) {
+            User::find(Auth::user()->id)
+                ->update([
+                    'name' => $request->name
+                ]);
+        }
+
         Profile::where('user_id', Auth::user()->id)
             ->update([
                 'phone'     => $request->phone,
