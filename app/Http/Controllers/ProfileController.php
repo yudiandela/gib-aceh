@@ -94,7 +94,6 @@ class ProfileController extends Controller
         }
 
         return redirect()->back()->with('success', 'Berhasil mengubah photo profile');
-        dd($image_url);
     }
 
     /**
