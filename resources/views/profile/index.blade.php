@@ -26,9 +26,19 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="{{ $user->profile->avatar }}"
-                                alt="User profile picture">
+                            <img class="profile-user-img" src="{{ $user->profile->avatar }}" alt="User profile picture">
+
+                            <form action="{{ route('profile.update', Auth::user()->id) }}" method="post"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('put')
+                                <input type="file" name="photo" id="photo-user" hidden>
+                                <button type="submit" class="btn btn-success btn-sm btn-upload hide">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </form>
                         </div>
+
 
                         <h3 class="profile-username text-center">
                             {{ $user->name }}
@@ -246,3 +256,36 @@
     </div><!-- /.container-fluid -->
 </section>
 @endsection
+
+@push('script')
+<script>
+    function readURL() {
+        var $input = $(this)
+        var $photo =  $('.profile-user-img ')
+        if (this.files && this.files[0]) {
+            var reader = new FileReader()
+            reader.onload = function (e) {
+                $photo.attr('src', e.target.result).show()
+            }
+            reader.readAsDataURL(this.files[0])
+            $('.btn-upload').show()
+        }
+    }
+
+    $('.profile-user-img').click(function() {
+        $('#photo-user').click()
+    })
+
+    $('.btn-upload').hide()
+
+    $("#photo-user").change(readURL)
+
+    @if (session('success'))
+    toastr.success('{{ session('success') }}')
+    @endif
+
+    @if (session('error'))
+    toastr.error('{{ session('error') }}')
+    @endif
+</script>
+@endpush

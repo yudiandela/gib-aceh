@@ -18,7 +18,12 @@ Route::get('/', 'RootController');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', 'DashboardController')->name('dashboard');
 
+    // UserManagement CRUD
+    Route::get('user', 'UserController@index')->name('user');
+    Route::post('user', 'UserController@store');
+
     // Profile CRUD
     Route::get('profile', 'ProfileController@index')->name('profile');
     Route::post('profile', 'ProfileController@store');
+    Route::put('profile/{profile}', 'ProfileController@update')->name('profile.update');
 });

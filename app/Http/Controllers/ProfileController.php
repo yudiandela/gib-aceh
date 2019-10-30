@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Profile;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -37,7 +39,7 @@ class ProfileController extends Controller
                 'twitter'   => $request->twitter
             ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Berhasil input data Profile');
     }
 
     /**
@@ -71,7 +73,20 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($request->hasFile('photo')) {
+            $image            = $request->file('photo');
+            $originalFileName = $image->getClientOriginalName();
+            $extension        = $image->getClientOriginalExtension();
+            $fileName         = Str::slug(env('UNIQUE_PHOTO_NAME', 'gib-aceh') . ' ' . Auth::user()->name . ' ' . date('d-m-Y') . ' ' . time()) . '.' . $extension;
+
+            $image_url = $image->storeAs('public/profile', $fileName);
+
+            $profile = Profile::find($id);
+            $profile->photo = url(Storage::url($image_url));
+            $profile->save();
+        }
+
+        return redirect()->back()->with('success', 'Berhasil mengubah photo profile');
     }
 
     /**

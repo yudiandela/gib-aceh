@@ -10,6 +10,10 @@
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="/vendor/plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/vendor/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="/vendor/plugins/toastr/toastr.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/vendor/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
@@ -57,7 +61,8 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="/vendor/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ Auth::user()->profile->photo !== null ? Auth::user()->profile->photo : '/images/gib-logo.png' }}"
+                            alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -80,6 +85,13 @@
                                 class="nav-link {{ strpos(Route::currentRouteName(), 'profile') !== false ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>{{ __('Profile') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('user') }}"
+                                class="nav-link {{ strpos(Route::currentRouteName(), 'user') !== false ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>{{ __('User') }}</p>
                             </a>
                         </li>
                         {{-- <li
@@ -137,6 +149,11 @@
     <script src="/vendor/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="/vendor/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables -->
+    <script src="/vendor/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/vendor/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <!-- Toastr -->
+    <script src="/vendor/plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/vendor/dist/js/adminlte.min.js"></script>
     <!-- InputMask -->
@@ -144,13 +161,18 @@
     <script src="/vendor/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
 
     <script>
-        $('#logoutBtn').click(function(event) {
-            event.preventDefault();
-            $('#logoutForm').submit();
+        $(function() {
+            $('#logoutBtn').click(function(event) {
+                event.preventDefault();
+                $('#logoutForm').submit();
+            })
+            // Format Handphone
+            $('[data-mask]').inputmask()
+
+            $('.dataTable').DataTable();
         })
-        // Format Handphone
-        $('[data-mask]').inputmask()
     </script>
+    @stack('script')
 </body>
 
 </html>

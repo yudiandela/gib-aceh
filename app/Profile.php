@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class Profile extends Model
 {
@@ -15,11 +16,15 @@ class Profile extends Model
 
     public function getAvatarAttribute()
     {
-        if (filter_var($this->photo, FILTER_VALIDATE_URL)) {
-            return $this->photo;
+        if ($this->photo !== null) {
+            if (filter_var($this->photo, FILTER_VALIDATE_URL)) {
+                return $this->photo;
+            }
+
+            return storage_path($this->photo);
         }
 
-        return storage_path($this->photo);
+        return '/images/gib-logo.png';
     }
 
     public function getFacebookLinkAttribute()
@@ -60,6 +65,54 @@ class Profile extends Model
         } else if ($this->twitter !== null) {
             return 'https://twitter.com/' . $this->twitter;
         }
+        return null;
+    }
+
+    public function getFacebookUserAttribute()
+    {
+        $link = $this->getFacebookLinkAttribute();
+
+        if ($link !== null) {
+            $data = explode('/', $link);
+            return '@' . Arr::last($data);
+        }
+
+        return null;
+    }
+
+    public function getTwitterUserAttribute()
+    {
+        $link = $this->getTwitterLinkAttribute();
+
+        if ($link !== null) {
+            $data = explode('/', $link);
+            return '@' . Arr::last($data);
+        }
+
+        return null;
+    }
+
+    public function getInstagramUserAttribute()
+    {
+        $link = $this->getInstagramLinkAttribute();
+
+        if ($link !== null) {
+            $data = explode('/', $link);
+            return '@' . Arr::last($data);
+        }
+
+        return null;
+    }
+
+    public function getYoutubeUserAttribute()
+    {
+        $link = $this->getYoutubeLinkAttribute();
+
+        if ($link !== null) {
+            $data = explode('/', $link);
+            return '@' . Arr::last($data);
+        }
+
         return null;
     }
 }
