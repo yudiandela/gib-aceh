@@ -21,7 +21,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // UserManagement CRUD
     Route::get('user', 'UserController@index')->name('user');
     Route::post('user', 'UserController@store');
-    Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy');
 
     // Profile CRUD
     Route::get('profile', 'ProfileController@index')->name('profile');
@@ -29,6 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('profile/{profile}', 'ProfileController@update')->name('profile.update');
 
     Route::middleware('admin')->group(function () {
-        Route::patch('profile/{profile}', 'ProfileController@update');
+        Route::patch('user/{user}', 'UserController@updateRole')->name('user.role');
+        Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy');
     });
 });

@@ -27,7 +27,6 @@
                             <th>#</th>
                             <th>Nama Lengkap</th>
                             <th>Email</th>
-                            <th>Handphone</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -38,7 +37,6 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}
-                            <td>{{ $user->profile !== null ? $user->profile->phone : null }}</td>
                             </td>
                             <td>
                                 <a href="{{ $user->id }}" class="showUser btn btn-sm btn-primary" data-toggle="modal"
@@ -61,10 +59,21 @@
                                     <i class="fas fa-trash"></i>
                                 </a>
 
-                                <form id="delete-user-{{ $user->id }}" action="{{ route('user.destroy', $user->id) }}"
-                                    method="post">
+                                <form hidden id="delete-user-{{ $user->id }}"
+                                    action="{{ route('user.destroy', $user->id) }}" method="post">
                                     @csrf
                                     @method('delete')
+                                </form>
+
+                                <a href="{{ route('user.role', $user->id) }}" class="btn btn-info btn-sm"
+                                    onclick="event.preventDefault(); document.getElementById('role-{{ $user->id }}').submit();">
+                                    <i class="fas fa-user"></i>
+                                </a>
+
+                                <form hidden id="role-{{ $user->id }}" action="{{ route('user.role', $user->id) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('patch')
                                 </form>
                                 @endif
                             </td>

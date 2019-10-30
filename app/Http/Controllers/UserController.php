@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('role', '<>', 1)->get();
+        $users = User::where('role', '<>', 2)->get();
         return view('user.index', compact('users'));
     }
 
@@ -71,6 +71,21 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //
+    }
+
+    /**
+     * Update Role on the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function updateRole(Request $request, User $user)
+    {
+        $user->role = 1;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Berhasil menjadikan admin');
     }
 
     /**
