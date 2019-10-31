@@ -94,6 +94,13 @@
                                 <p>{{ __('User') }}</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('donation') }}"
+                                class="nav-link {{ strpos(Route::currentRouteName(), 'donation') !== false ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-handshake"></i>
+                                <p>{{ __('Donation') }}</p>
+                            </a>
+                        </li>
                         {{-- <li
                             class="nav-item has-treeview {{ strpos(Route::currentRouteName(), 'profile') !== false ? 'menu-open' : '' }}">
                         <a href="#"
@@ -166,8 +173,11 @@
                 event.preventDefault();
                 $('#logoutForm').submit();
             })
+
             // Format Handphone
             $('[data-mask]').inputmask()
+            // Format Money
+            $('[data-money]').inputmask()
 
             $('.dataTable').DataTable();
         })

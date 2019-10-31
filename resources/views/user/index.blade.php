@@ -35,7 +35,7 @@
                         @foreach ($users as $user)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->name }} <small class="badge badge-success">{{ $user->show_role }}</small></td>
                             <td>{{ $user->email }}
                             </td>
                             <td>

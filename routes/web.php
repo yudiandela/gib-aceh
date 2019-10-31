@@ -27,6 +27,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('profile', 'ProfileController@store');
     Route::put('profile/{profile}', 'ProfileController@update')->name('profile.update');
 
+    // Donation CRUD
+    Route::get('donation', 'DonationController@index')->name('donation');
+    Route::post('donation', 'DonationController@store');
+    Route::get('donation/create', 'DonationController@create')->name('donation.create');
+    Route::get('donation/{donation}', 'DonationController@edit')->name('donation.edit');
+    Route::put('donation/{donation}', 'DonationController@update')->name('donation.update');
+
     Route::middleware('admin')->group(function () {
         Route::patch('user/{user}', 'UserController@updateRole')->name('user.role');
         Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy');

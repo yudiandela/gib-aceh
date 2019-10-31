@@ -42,6 +42,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class);
     }
 
+    public function getShowRoleAttribute()
+    {
+        switch ($this->role) {
+            case 1:
+                $role = 'admin';
+                break;
+            default:
+                $role = '';
+        }
+        return $role;
+    }
+
     public function isAdmin()
     {
         if ($this->role > 0) {
